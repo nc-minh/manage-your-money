@@ -1,4 +1,4 @@
 <template>
-  <h1>đeauf</h1>
+  <h1>view mặc định</h1>
   <slot/>
 </template>

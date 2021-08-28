@@ -10,7 +10,6 @@ import { PUBLIC_LAYOUT } from './constants/index.js'
 export default {
   setup() {
     const route = useRoute();
-    console.log(route);
     return{
       componentId: computed(() => (route.meta.layout || PUBLIC_LAYOUT) + '-layout')
     }

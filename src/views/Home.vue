@@ -1,16 +1,22 @@
 <template>
   <div class="home">
     <i class="icofont-wallet"></i>
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div v-if="user">
+      {{ user }}
+    </div>
   </div>
 </template>
 
 <script>
-
+import { useUser } from '../composables/useUser.js'
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
+  setup(){
+    const { getUser } = useUser()
+    const { user } = getUser()
+
+    return{
+      user
+    }
   }
 }
 </script>
