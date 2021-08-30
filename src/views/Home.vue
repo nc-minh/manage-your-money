@@ -2,7 +2,7 @@
   <div class="home">
     <i class="icofont-wallet"></i>
     <div v-if="user">
-      {{ user }}
+      {{ user.displayName }}
     </div>
   </div>
 </template>

@@ -61,7 +61,7 @@ export default {
       console.log(email, password)
       await signIn(email.value, password.value)
       if(!error.value){
-        router.push({name: 'Home', params: {}})
+        router.push({name: 'Profile', params: {}})
       }
     }
     return{

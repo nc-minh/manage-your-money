@@ -77,7 +77,7 @@ export default {
       console.log(email.value, password.value);
       await signUp(email.value, password.value, fullname.value)
       if(!error.value){
-       router.push({name: 'Home', params: {}})
+       router.push({name: 'Profile', params: {}})
       }
     }
     return{
