@@ -1,8 +1,9 @@
-import { nextTick } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router'
 import { projectAuth } from '../configs/firebase.js'
+import 'vue-router'
+
 // Auth Guards
-const requireAuth = (to, from, next) =>{
+const requireAuth = (to, from ,next) =>{
   const user = projectAuth.currentUser
   console.log('before enter router: ', user);
   if(!user){
