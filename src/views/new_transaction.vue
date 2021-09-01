@@ -12,7 +12,7 @@
 
                             <div class="flex flex-col border-b border-gray-100 pb-1">
                                 <span class="font-semibold text-xs text-dark">Total</span>
-                                <input v-model="total" id="total" class="text-4xl text-dark w-full outline-none mt-1" placeholder="0" type="text">
+                                <input v-model="total" id="total" class="text-4xl text-dark w-full outline-none mt-1" placeholder="0" type="number">
                             </div>
                         </label>
                     </div>
@@ -124,44 +124,82 @@
                                 </div>
 
                                 <div class="flex-1 py-2">
-                                    <div class="w-full">Upload photos</div>
+                                    <div class="w-full font-semibold cursor-pointer">Upload photos</div>
+                                    <input class="w-0 h-0 overflow-hidden absolute" type="file" name="upload" id="upload" @change="onChangeFile">
                                 </div>
                             </label>
                         </div>
                     </div>
                 </div>
+
+                <div class="text-red my-3">
+                    {{ errorFile }}
+                </div>
             </div>
             <!-- end upload photos -->
         </template>
         <!-- end advanced form -->
+        <button type="submit" class="bg-primary text-white">thêm vào</button>
     </form>
 </template>
 <script>
 import { ref } from '@vue/reactivity'
 import { useUser } from '../composables/useUser'
+import useCollection from '../composables/useCollection'
+import useStorage from '../composables/useStorage'
 export default {
     setup(){
         const isMoreDetails = ref(false)
-        const total = ref(0)
+        const total = ref()
         const category = ref('')
         const note = ref('')
         const date = ref(new Date())
+        const file = ref(null)
+        const errorFile = ref(null)
 
+        const { error, addRecord } = useCollection('transactions')
         const { getUser } = useUser()
         const { user } = getUser()
-        function onSubmit(){
-            const transaction = {
-                total,
-                category,
-                note,
-                date,
-                userID: user.uid
+        const { url, uploadFile } = useStorage('transactions')
+
+        function onChangeFile(event){
+            const select = event.target.files[0]
+            const typesFile = ['image/png', 'image/jpg ', 'image/jpeg']
+            console.log('ok: ', select)
+
+
+            if(select && typesFile.includes(select.type)){
+                file.value = select
+            }else{
+                file.value = null
+                errorFile.value = 'Không thể tải ảnh!'
             }
-            console.log(transaction);
+        }
+
+        async function onSubmit(){
+
+            if(file.value) await uploadFile(file.value)
+            console.log('url file: ', url);
+
+            const transactions = {
+                total: parseInt(total.value),
+                category: category.value,
+                note: note.value,
+                date: date.value,
+                userID: user.value.uid
+            }
+            console.log(transactions);
+            
+            await addRecord(transactions)
+            console.log(error)
+            console.log('created');
+
         }
         return{
             onSubmit,
-            isMoreDetails, total, category, note, date
+            isMoreDetails, total, category, note, date,
+            onChangeFile,
+            errorFile
         }
     }
 }
