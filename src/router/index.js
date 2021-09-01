@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { projectAuth } from '../configs/firebase.js'
+import { nextTick } from 'vue';
 import 'vue-router'
 
 // Auth Guards
