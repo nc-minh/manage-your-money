@@ -6,7 +6,7 @@ const useCollection = (name) => {
     async function addRecord(record){
         error.value = null
       try {
-        const response = await projectFirestore.collection(name).add(record)
+        const response = await projectFirestore.collection(name, 'transactions').add(record)
         return response
       } catch (err) {
         console.log({err})

@@ -57,14 +57,14 @@ const routes = [
     component: () => import(/* webpackChunkName: "logout" */ '../views/logout')
   },
   {
-    path: '/report',
-    name: 'Report',
+    path: '/receipt',
+    name: 'Receipt',
     meta: {
-      text: 'Report',
+      text: 'Receipt',
       leading: false,
       isShowFooter: true
     },
-    component: () => import(/* webpackChunkName: "report" */ '../views/report')
+    component: () => import(/* webpackChunkName: "report" */ '../views/receipt')
   },
   {
     path: '/budget',

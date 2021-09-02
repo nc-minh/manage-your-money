@@ -91,12 +91,12 @@
                                 </div>
 
                                 <div class="flex-1 border-b border-gray-100 pb-1">
-                                    <input id="location" class="text-dark w-full outline-none" placeholder="Location" type="text">
+                                    <input v-model="location" id="location" class="text-dark w-full outline-none" placeholder="Location" type="text">
                                 </div>
                             </label>
                         </div>
                         <div class="row">
-                            <label for="with" class="flex items-center">
+                            <label for="withPerson" class="flex items-center">
                                 <div class="flex items-center flex-none w-10 text-right leading-10 mr-4 py-3">
                                     <span class="flex-none w-10 mr-4">
                                         <i class="icofont-users-alt-6 text-2xl"></i>
@@ -104,7 +104,7 @@
                                 </div>
 
                                 <div class="flex-1 border-b border-gray-100 pb-1">
-                                    <input id="with" class="text-dark w-full outline-none" placeholder="Who do you trade with?" type="text">
+                                    <input v-model="withPerson" id="withPerson" class="text-dark w-full outline-none" placeholder="Who do you trade with?" type="text">
                                 </div>
                             </label>
                         </div>
@@ -150,10 +150,12 @@ import useStorage from '../composables/useStorage'
 export default {
     setup(){
         const isMoreDetails = ref(false)
-        const total = ref()
+        const total = ref('')
         const category = ref('')
         const note = ref('')
         const date = ref(new Date())
+        const location = ref('')
+        const withPerson = ref('')
         const file = ref(null)
         const errorFile = ref(null)
 
@@ -186,9 +188,20 @@ export default {
                 category: category.value,
                 note: note.value,
                 date: date.value,
-                userID: user.value.uid
+                userID: user.value.uid,
+                location: location.value,
+                withPerson: withPerson.value,
+                image: url.value
             }
             console.log(transactions);
+
+            total.value = ''
+            category.value = ''
+            note.value = ''
+            date.value = new Date()
+            location.value = ''
+            withPerson.value = ''
+
             
             await addRecord(transactions)
             console.log(error)
@@ -199,7 +212,8 @@ export default {
             onSubmit,
             isMoreDetails, total, category, note, date,
             onChangeFile,
-            errorFile
+            errorFile,
+            location, withPerson
         }
     }
 }

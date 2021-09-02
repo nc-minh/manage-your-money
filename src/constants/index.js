@@ -56,8 +56,8 @@ export const NAV_BOTTOM_ITEMS = [
     },
     {
         icon: 'icofont-paper',
-        text: 'Report',
-        name: 'Report'
+        text: 'Receipt',
+        name: 'Receipt'
     },
     {
         icon: 'icofont-user',
