@@ -5,7 +5,7 @@ import 'firebase/compat/firestore';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyDaM0MFGZcep-hnEZzZMSCuQBpTnHR7cLI",
+  apiKey: 'AIzaSyDaM0MFGZcep-hnEZzZMSCuQBpTnHR7cLI',
   authDomain: "your-money-905ef.firebaseapp.com",
   databaseURL: "https://your-money-905ef-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "your-money-905ef",

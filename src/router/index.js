@@ -23,7 +23,6 @@ const routes = [
       text: 'Heyy!',
       leading: true,
       isShowFooter: true,
-      requiresAuth: false,
     },
     component: () => import(/* webpackChunkName: "Home" */ '../views/home.vue'),
     beforeEnter: requireAuth
@@ -33,7 +32,6 @@ const routes = [
     name: 'Register',
     meta: {
       layout: 'auth',
-      requiresAuth: false,
     },
     component: () => import(/* webpackChunkName: "register" */ '../views/register.vue'),
   },
@@ -42,7 +40,6 @@ const routes = [
     name: 'Login',
     meta: {
       layout: 'auth',
-      requiresAuth: false,
     },
     component: () => import(/* webpackChunkName: "login" */ '../views/login.vue')
   },
@@ -53,7 +50,6 @@ const routes = [
       text: 'Profile',
       leading: false,
       isShowFooter: true,
-      requiresAuth: false,
     },
     component: () => import(/* webpackChunkName: "profile" */ '../views/profile'),
     beforeEnter: requireAuth
@@ -70,7 +66,6 @@ const routes = [
       text: 'Receipt',
       leading: false,
       isShowFooter: true,
-      requiresAuth: false,
     },
     component: () => import(/* webpackChunkName: "report" */ '../views/receipt'),
     beforeEnter: requireAuth
@@ -82,7 +77,6 @@ const routes = [
       text: 'Budget',
       leading: false,
       isShowFooter: true,
-      requiresAuth: false,
     },
     component: () => import(/* webpackChunkName: "budget" */ '../views/budget'),
     beforeEnter: requireAuth
@@ -94,7 +88,6 @@ const routes = [
       text: 'New Transaction',
       leading: false,
       isShowFooter: false,
-      requiresAuth: false,
     },
     component: () => import(/* webpackChunkName: "new_transaction" */ '../views/new_transaction'),
     beforeEnter: requireAuth
@@ -109,7 +102,6 @@ const routes = [
       requiresAuth: false,
     },
     component: () => import(/* webpackChunkName: "404" */ '../views/404'),
-    beforeEnter: requireAuth
   },
   { path: '/:pathMatch(.*)*', redirect: '/404' }
 ]
