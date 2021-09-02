@@ -35,7 +35,7 @@
       <!-- end error -->
 
       <!-- start direction -->
-      <div class="w-full text-center mt-6">
+      <div class="w-full text-center mt-6 mb-6">
         <span class="font-semibold">I'm a new user.</span>
         <span class="ml-1">
           <router-link :to="{ name: 'Register', params: {} }" class="text-primary font-bold">Sign Up</router-link>

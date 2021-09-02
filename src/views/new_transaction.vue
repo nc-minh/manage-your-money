@@ -1,7 +1,10 @@
 <template>
     <form @submit.prevent="onSubmit">
+        <div class="row mt-5 flex justify-center font-bold px-2">
+            <div class="text-red text-center">{{ noti }}</div>
+        </div>
         <!-- start main form -->
-        <div class="row mt-8">
+        <div class="row mt-5">
             <div class="bg-white rounded-lg py-4">
                 <div class="container mx-auto px-8">
                     <div class="row">
@@ -79,9 +82,9 @@
 
         <!-- start advanced form -->
         <template v-if="isMoreDetails">
-            <div class="row mt-8">
+            <div class="row mt-5">
                 <div class="bg-white rounded-lg py-4">
-                    <div class="container mx-auto px-8">
+                    <div class="container mx-auto px-8 mb-8">
                         <div class="row">
                             <label for="location" class="flex items-center">
                                 <div class="flex items-center flex-none w-10 text-right leading-10 mr-4 py-3">
@@ -112,7 +115,7 @@
                 </div>
             </div>
             <!-- start upload photos -->
-            <div class="row mt-8">
+            <div class="row mt-5">
                 <div class="bg-white rounded-lg py-4">
                     <div class="container mx-auto px-8">
                         <div class="row">
@@ -139,7 +142,10 @@
             <!-- end upload photos -->
         </template>
         <!-- end advanced form -->
-        <button type="submit" class="bg-primary text-white">thêm vào</button>
+        <div class="row flex justify-center items-center py-4">
+            <router-link class="mr-4 border border-primary py-2 px-5 rounded-lg " to="/">Home</router-link>
+            <button type="submit" class="border py-2 px-5 rounded-lg bg-primary text-white">Thêm</button>
+        </div>
     </form>
 </template>
 <script>
@@ -158,6 +164,7 @@ export default {
         const withPerson = ref('')
         const file = ref(null)
         const errorFile = ref(null)
+        const noti = ref('')
 
         const { error, addRecord } = useCollection('transactions')
         const { getUser } = useUser()
@@ -180,6 +187,12 @@ export default {
 
         async function onSubmit(){
 
+            if(total.value === '' || category.value === ''){
+                console.log('tổng tiền bị trống')
+                noti.value = 'Bạn chưa nhập số tiền hoặc chọn danh mục sử dụng'
+                return 0;
+            }
+
             if(file.value) await uploadFile(file.value)
             console.log('url file: ', url);
 
@@ -193,7 +206,6 @@ export default {
                 withPerson: withPerson.value,
                 image: url.value
             }
-            console.log(transactions);
 
             total.value = ''
             category.value = ''
@@ -208,12 +220,14 @@ export default {
             console.log('created');
 
         }
+
         return{
             onSubmit,
             isMoreDetails, total, category, note, date,
             onChangeFile,
             errorFile,
-            location, withPerson
+            location, withPerson,
+            noti
         }
     }
 }

@@ -1,5 +1,4 @@
 <template>
-    <h1>view auth</h1>
     <NavigationBrand/>
     <slot/>
 </template>

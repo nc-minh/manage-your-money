@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { projectAuth } from '../configs/firebase.js'
 import 'vue-router'
-
 // Auth Guards
 const requireAuth = (to, from ,next) =>{
   const user = projectAuth.currentUser
@@ -13,6 +12,9 @@ const requireAuth = (to, from ,next) =>{
   }
 }
 
+
+
+
 const routes = [
   {
     path: '/',
@@ -20,23 +22,27 @@ const routes = [
     meta: {
       text: 'Heyy!',
       leading: true,
-      isShowFooter: true
+      isShowFooter: true,
+      requiresAuth: false,
     },
-    component: () => import(/* webpackChunkName: "Home" */ '../views/home.vue')
+    component: () => import(/* webpackChunkName: "Home" */ '../views/home.vue'),
+    beforeEnter: requireAuth
   },
   {
     path: '/register',
     name: 'Register',
     meta: {
       layout: 'auth',
+      requiresAuth: false,
     },
-    component: () => import(/* webpackChunkName: "register" */ '../views/register.vue')
+    component: () => import(/* webpackChunkName: "register" */ '../views/register.vue'),
   },
   {
     path: '/login',
     name: 'Login',
     meta: {
       layout: 'auth',
+      requiresAuth: false,
     },
     component: () => import(/* webpackChunkName: "login" */ '../views/login.vue')
   },
@@ -46,7 +52,8 @@ const routes = [
     meta: {
       text: 'Profile',
       leading: false,
-      isShowFooter: true
+      isShowFooter: true,
+      requiresAuth: false,
     },
     component: () => import(/* webpackChunkName: "profile" */ '../views/profile'),
     beforeEnter: requireAuth
@@ -62,9 +69,11 @@ const routes = [
     meta: {
       text: 'Receipt',
       leading: false,
-      isShowFooter: true
+      isShowFooter: true,
+      requiresAuth: false,
     },
-    component: () => import(/* webpackChunkName: "report" */ '../views/receipt')
+    component: () => import(/* webpackChunkName: "report" */ '../views/receipt'),
+    beforeEnter: requireAuth
   },
   {
     path: '/budget',
@@ -72,9 +81,11 @@ const routes = [
     meta: {
       text: 'Budget',
       leading: false,
-      isShowFooter: true
+      isShowFooter: true,
+      requiresAuth: false,
     },
-    component: () => import(/* webpackChunkName: "budget" */ '../views/budget')
+    component: () => import(/* webpackChunkName: "budget" */ '../views/budget'),
+    beforeEnter: requireAuth
   },
   {
     path: '/new_transaction',
@@ -82,10 +93,25 @@ const routes = [
     meta: {
       text: 'New Transaction',
       leading: false,
-      isShowFooter: false
+      isShowFooter: false,
+      requiresAuth: false,
     },
-    component: () => import(/* webpackChunkName: "new_transaction" */ '../views/new_transaction')
-  }
+    component: () => import(/* webpackChunkName: "new_transaction" */ '../views/new_transaction'),
+    beforeEnter: requireAuth
+  },
+  {
+    path: '/404',
+    name: '404',
+    meta: {
+      text: '404',
+      leading: false,
+      isShowFooter: false,
+      requiresAuth: false,
+    },
+    component: () => import(/* webpackChunkName: "404" */ '../views/404'),
+    beforeEnter: requireAuth
+  },
+  { path: '/:pathMatch(.*)*', redirect: '/404' }
 ]
 
 const router = createRouter({

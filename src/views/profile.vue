@@ -15,7 +15,7 @@
     <!-- end info -->
 
     <!-- start menu -->
-    <div class="row">
+    <div class="row mb-20">
         <div class="container mx-auto px-8">
             <div class="grid grid-cols-1">
                 <div class="col-span-1">
